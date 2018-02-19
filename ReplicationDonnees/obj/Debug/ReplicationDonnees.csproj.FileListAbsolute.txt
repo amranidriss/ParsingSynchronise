@@ -1,0 +1,9 @@
+C:\Users\acer\Desktop\ReplicationDonnees\ReplicationDonnees\bin\Debug\ReplicationDonnees.exe.config
+C:\Users\acer\Desktop\ReplicationDonnees\ReplicationDonnees\bin\Debug\ReplicationDonnees.exe
+C:\Users\acer\Desktop\ReplicationDonnees\ReplicationDonnees\bin\Debug\ReplicationDonnees.pdb
+C:\Users\acer\Desktop\ReplicationDonnees\ReplicationDonnees\obj\Debug\ReplicationDonnees.csprojResolveAssemblyReference.cache
+C:\Users\acer\Desktop\ReplicationDonnees\ReplicationDonnees\obj\Debug\ReplicationDonnees.exe
+C:\Users\acer\Desktop\ReplicationDonnees\ReplicationDonnees\obj\Debug\ReplicationDonnees.pdb
+C:\Users\acer\Desktop\ReplicationDonnees\ReplicationDonnees\bin\Debug\antlr.runtime.dll
+C:\Users\acer\Desktop\ReplicationDonnees\ReplicationDonnees\bin\Debug\DDay.Collections.dll
+C:\Users\acer\Desktop\ReplicationDonnees\ReplicationDonnees\bin\Debug\DDay.iCal.dll
