@@ -28,7 +28,7 @@ namespace ReplicationDonnees
                 IRecurringComponent rc = occurrence.Source as IRecurringComponent;
                 if (rc != null)
                 {
-                    Console.WriteLine(rc.Summary + ": " + occurrenceTime.ToString() + "  Modified on : " + rc.LastModified.AddHours(1) + "   Last Synch :" + rc.DTStamp.AddHours(1));
+                    Console.WriteLine(rc.Summary + ": " + occurrenceTime.ToString() + "  Modified on : " + rc.LastModified.AddHours(1) + "   Last Synch :" + rc.DTStamp.AddHours(1) + "END DATE : " );
                     listdatetime.Add(rc.DTStamp.AddHours(1));
                 }
             }

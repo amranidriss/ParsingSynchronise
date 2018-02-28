@@ -22,23 +22,24 @@ namespace ReplicationDonnees
 {
     class Program
     {
-        /*static void Main(string[] args)
+        static void Main(string[] args)
         {
             String sUrl ="https://planning.univ-lorraine.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=94694,94695,137604,137605,143847,161667,131172,28064,180436,180437,187172,187173,188343,189790,190400,191558,195038,195039,195267,196054,196183,196296,206014,206831,207691,223135,223136,224368,229624,231294,234516&projectId=5&calType=ical&nbWeeks=16";
             String path = "ade.ics";
            
-          List<IDateTime> ilist = ParseIcsFile.parseics(path);
+         // List<IDateTime> ilist = ParseIcsFile.parseics(path);
         
-           Download.copyURLToFile(sUrl);
-            ParseIcsFile.detectmodified(path,ilist);
-          Console.Read();*/
-            // If modifying these scopes, delete your previously saved credentials
-        // at ~/.credentials/calendar-dotnet-quickstart.json
-        static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
-        static string ApplicationName = "Google Calendar API .NET Quickstart";
+         //  Download.copyURLToFile(sUrl);
+          //  ParseIcsFile.detectmodified(path,ilist);
+       
+       
+        
 
-        static void Main(string[] args)
-        {
+            //ADD GOOGLE API AND ADD TEST EVENT
+         string[] Scopes = { CalendarService.Scope.Calendar };
+         string ApplicationName = "Google Calendar API .NET Quickstart";
+
+       
             UserCredential credential;
 
             using (var stream =
@@ -73,7 +74,7 @@ namespace ReplicationDonnees
             request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
 
             // List events.
-            Events events = request.Execute();
+          /*  Events events = request.Execute();
             Console.WriteLine("Upcoming events:");
             if (events.Items != null && events.Items.Count > 0)
             {
@@ -90,7 +91,54 @@ namespace ReplicationDonnees
             else
             {
                 Console.WriteLine("No upcoming events found.");
-            }
+            }*/
+
+            //ADD TEST EVENT 
+           /* Google.Apis.Calendar.v3.Data.Event newEvent = new Google.Apis.Calendar.v3.Data.Event();
+            newEvent.Summary = "Summary";
+            newEvent.Description = "New EVent Test";
+            newEvent.Start = new EventDateTime();
+            newEvent.Start.DateTime = new DateTime(2018, 5, 16, 15, 13, 13, 12);
+
+            newEvent.End = new EventDateTime();
+            newEvent.End.DateTime = new DateTime(2018, 7, 16, 15, 13, 13, 12);
+            service.Events.Insert(newEvent, "primary").Execute();
+             */
+
+           var calendars = iCalendar.LoadFromFile(@path);
+           IList<Occurrence> occurrences = calendars.GetOccurrences(new DateTime(2017, 1, 1), new DateTime(2018, 3, 26));
+
+           int i = 0;
+           foreach (Occurrence occurrence in occurrences)
+           {
+               DateTime occurrenceTime = occurrence.Period.StartTime.Local.AddHours(1);
+               IRecurringComponent rc = occurrence.Source as IRecurringComponent;
+               if (rc != null)
+               {
+                   Google.Apis.Calendar.v3.Data.Event newEvent = new Google.Apis.Calendar.v3.Data.Event();
+                   newEvent.Summary = rc.Calendar.Events[i].Summary;
+
+                      DateTime o= new DateTime(rc.Calendar.Events[i].Start.Year,rc.Calendar.Events[i].Start.Month,
+                          rc.Calendar.Events[i].Start.Day,rc.Calendar.Events[i].Start.Hour,rc.Calendar.Events[i].Start.Minute,
+                          rc.Calendar.Events[i].Start.Second);
+                      newEvent.Start = new EventDateTime();
+                      newEvent.Start.DateTime=o ;
+                      o = new DateTime(rc.Calendar.Events[i].DTEnd.Year, rc.Calendar.Events[i].DTEnd.Month,
+                             rc.Calendar.Events[i].DTEnd.Day, rc.Calendar.Events[i].DTEnd.Hour, rc.Calendar.Events[i].DTEnd.Minute,
+                             rc.Calendar.Events[i].DTEnd.Second);
+                      newEvent.End = new EventDateTime();
+                   newEvent.End.DateTime = o;
+                   newEvent.Description = rc.Calendar.Events[i].Description;
+                   newEvent.Location = rc.Calendar.Events[i].Location;
+                 
+                   service.Events.Insert(newEvent, "primary").Execute();
+                   Console.WriteLine(rc.Calendar.Events[i].DTEnd + rc.Calendar.Events[i].Summary);
+                   i++;
+               }
+           }
+            
+            
+           
             Console.Read();
 
 
