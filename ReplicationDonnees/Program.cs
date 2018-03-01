@@ -137,31 +137,29 @@ namespace ReplicationDonnees
            }*/
 
 
-          //  Download.copyURLToFile(sUrl,"ade.ics");
-          //  Download.copyURLToFile(sUrl, "tmp.ics");
+            //Download.copyURLToFile(sUrl,"ade.ics");
+            //Download.copyURLToFile(sUrl, "tmp.ics");
             List<IEvent> ilist = ParseIcsFile.parseics("ade.ics");
             List<IEvent> ilist1 = ParseIcsFile.parseics("tmp.ics");
-            /*foreach (IEvent e in ilist)
-            {
-                Console.WriteLine(e.Summary);
-            }
-          */
+
 
             ParseIcsFile.compareEvents(ilist, ilist1);
+
+            Console.WriteLine("Element supprimé : ");
             foreach (IEvent e in ParseIcsFile.listeSuppression)
             {
-                Console.WriteLine("Element supprimé : ");
                 Console.WriteLine(e.Summary);
             }
 
+            Console.WriteLine("\nElement inséré : ");
             foreach (IEvent e in ParseIcsFile.listeInsertion)
             {
-                Console.WriteLine("Element inséré : ");
                 Console.WriteLine(e.Summary);
             }
+
+            Console.WriteLine("\nElement modif : ");
             foreach (IEvent e in ParseIcsFile.listeModification)
             {
-                Console.WriteLine("Element modif : ");
                 Console.WriteLine(e.Summary);
             }
           

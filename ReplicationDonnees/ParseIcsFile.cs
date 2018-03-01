@@ -28,7 +28,7 @@ namespace ReplicationDonnees
                 //
                 IList<Occurrence> occurrences = calendars.GetOccurrences(new DateTime(2017, 1, 1), new DateTime(2018, 3, 26));
 
-                Console.WriteLine(Environment.NewLine + " Events:");
+                //Console.WriteLine(Environment.NewLine + " Events:");
                 int i = 0;
                 foreach (Occurrence occurrence in occurrences)
                 {
