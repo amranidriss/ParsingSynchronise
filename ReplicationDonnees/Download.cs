@@ -9,12 +9,12 @@ namespace ReplicationDonnees
 {
     class Download
     {
-        public static void copyURLToFile(string url)
+        public static void copyURLToFile(string url,String pathname)
         {
 
                 using (var client = new WebClient())
                 {
-                    client.DownloadFile(url, "ade.ics");
+                    client.DownloadFile(url, pathname);
 
                 }
 

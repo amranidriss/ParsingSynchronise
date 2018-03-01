@@ -25,7 +25,7 @@ namespace ReplicationDonnees
         static void Main(string[] args)
         {
             String sUrl ="https://planning.univ-lorraine.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=94694,94695,137604,137605,143847,161667,131172,28064,180436,180437,187172,187173,188343,189790,190400,191558,195038,195039,195267,196054,196183,196296,206014,206831,207691,223135,223136,224368,229624,231294,234516&projectId=5&calType=ical&nbWeeks=16";
-            String path = "ade.ics";
+           
            
          // List<IDateTime> ilist = ParseIcsFile.parseics(path);
         
@@ -36,7 +36,7 @@ namespace ReplicationDonnees
         
 
             //ADD GOOGLE API AND ADD TEST EVENT
-         string[] Scopes = { CalendarService.Scope.Calendar };
+       /*string[] Scopes = { CalendarService.Scope.Calendar };
          string ApplicationName = "Google Calendar API .NET Quickstart";
 
        
@@ -105,7 +105,7 @@ namespace ReplicationDonnees
             service.Events.Insert(newEvent, "primary").Execute();
              */
 
-           var calendars = iCalendar.LoadFromFile(@path);
+        /* var calendars = iCalendar.LoadFromFile(@path);
            IList<Occurrence> occurrences = calendars.GetOccurrences(new DateTime(2017, 1, 1), new DateTime(2018, 3, 26));
 
            int i = 0;
@@ -117,7 +117,7 @@ namespace ReplicationDonnees
                {
                    Google.Apis.Calendar.v3.Data.Event newEvent = new Google.Apis.Calendar.v3.Data.Event();
                    newEvent.Summary = rc.Calendar.Events[i].Summary;
-
+                      
                       DateTime o= new DateTime(rc.Calendar.Events[i].Start.Year,rc.Calendar.Events[i].Start.Month,
                           rc.Calendar.Events[i].Start.Day,rc.Calendar.Events[i].Start.Hour,rc.Calendar.Events[i].Start.Minute,
                           rc.Calendar.Events[i].Start.Second);
@@ -130,15 +130,41 @@ namespace ReplicationDonnees
                    newEvent.End.DateTime = o;
                    newEvent.Description = rc.Calendar.Events[i].Description;
                    newEvent.Location = rc.Calendar.Events[i].Location;
-                 
                    service.Events.Insert(newEvent, "primary").Execute();
                    Console.WriteLine(rc.Calendar.Events[i].DTEnd + rc.Calendar.Events[i].Summary);
                    i++;
                }
-           }
-            
-            
-           
+           }*/
+
+
+          //  Download.copyURLToFile(sUrl,"ade.ics");
+          //  Download.copyURLToFile(sUrl, "tmp.ics");
+            List<IEvent> ilist = ParseIcsFile.parseics("ade.ics");
+            List<IEvent> ilist1 = ParseIcsFile.parseics("tmp.ics");
+            /*foreach (IEvent e in ilist)
+            {
+                Console.WriteLine(e.Summary);
+            }
+          */
+
+            ParseIcsFile.compareEvents(ilist, ilist1);
+            foreach (IEvent e in ParseIcsFile.listeSuppression)
+            {
+                Console.WriteLine("Element supprimé : ");
+                Console.WriteLine(e.Summary);
+            }
+
+            foreach (IEvent e in ParseIcsFile.listeInsertion)
+            {
+                Console.WriteLine("Element inséré : ");
+                Console.WriteLine(e.Summary);
+            }
+            foreach (IEvent e in ParseIcsFile.listeModification)
+            {
+                Console.WriteLine("Element modif : ");
+                Console.WriteLine(e.Summary);
+            }
+          
             Console.Read();
 
 
