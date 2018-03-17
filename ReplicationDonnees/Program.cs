@@ -72,8 +72,7 @@ namespace ReplicationDonnees
                     Console.WriteLine(e.Summary);
                 }
 
-                FileStream s = File.Create("tmp.ics");
-                    
+                        FileStream s = File.Create("tmp.ics");
                         string content = File.ReadAllText("ade.ics");
                         s.Close();
                         File.WriteAllText("tmp.ics", content);

@@ -17,18 +17,15 @@ namespace ReplicationDonnees
         public static List<IEvent> parseics(String path)
         {
             
-            // Load the calendar file
             try
             {
                 IICalendarCollection calendars = iCalendar.LoadFromFile(@path);
                 List<IDateTime> listdatetime = new List<IDateTime>();
                 List<DDay.iCal.IEvent> listevent = new List<DDay.iCal.IEvent>();
-                //
-                // Get all events that occur in Year.
-                //
+               
                 IList<Occurrence> occurrences = calendars.GetOccurrences(new DateTime(2017, 1, 1), new DateTime(2018, 3, 26));
 
-                //Console.WriteLine(Environment.NewLine + " Events:");
+              
                 int i = 0;
                 foreach (Occurrence occurrence in occurrences)
                 {
@@ -51,33 +48,20 @@ namespace ReplicationDonnees
                     Console.WriteLine("ERREUR : " + e.Message);
                     return null;
             }
-
-
-
         }
         public static void compareEvents(List<IEvent> listeDeBase, List<IEvent> listeMAJ)
         {
-
-
-
             // Element à insérer
             foreach (IEvent e2 in listeMAJ)
             {
-                if (!listeDeBase.Contains(e2))
-                {
-                    listeInsertion.Add(e2);
-                }
-
+                if (!listeDeBase.Contains(e2)) listeInsertion.Add(e2);
+                
             }
-
             // Element à supprimer
             foreach (IEvent e1 in listeDeBase)
             {
-                if (!listeMAJ.Contains(e1))
-                {
-                    listeSuppression.Add(e1);
-                }
-
+                if (!listeMAJ.Contains(e1)) listeSuppression.Add(e1);
+                
             }
             // Element à modifier
             foreach (IEvent e1 in listeDeBase)
