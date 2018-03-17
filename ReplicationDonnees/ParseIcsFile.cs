@@ -37,10 +37,13 @@ namespace ReplicationDonnees
                     IRecurringComponent rc = occurrence.Source as IRecurringComponent;
                     if (rc != null)
                     {
+                        rc.Calendar.Events[i].Start.AddHours(1);
+                        rc.Calendar.Events[i].End.AddHours(1);
                         listevent.Add(rc.Calendar.Events[i]);
                         i++;
                     }
                 }
+                
                 return listevent;
 
             }

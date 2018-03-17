@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalendarHelper.cs" />
     <Compile Include="Download.cs" />
     <Compile Include="ParseIcsFile.cs" />
     <Compile Include="Program.cs" />

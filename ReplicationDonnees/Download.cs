@@ -14,8 +14,13 @@ namespace ReplicationDonnees
 
                 using (var client = new WebClient())
                 {
-                    client.DownloadFile(url, pathname);
+                    try
+                    {
+                        client.DownloadFile(url, pathname);
 
+                    }
+                    catch (Exception e) { Console.WriteLine(e.Message); }
+                    
                 }
 
         }
